@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  /* Layout Styles */
+  .app-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    background-color: #F40009;
+    width: 240px;
+    transition: width 0.3s;
+  }
+  
+  .sidebar.collapsed {
+    width: 80px;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    height: 64px;
+    color: white;
+  }
+  
+  .sidebar-title {
+    margin-left: 8px;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .sidebar-toggle {
+    color: white;
+    background: transparent;
+    border: none;
+  }
+  
+  .sidebar-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .sidebar-menu {
+    flex: 1;
+    margin-top: 16px;
+  }
+  
+  .sidebar-footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding: 16px;
+    background-color: inherit;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .profile-button {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Custom red color for profile button */
+  .profile-button.ant-btn-dangerous.ant-btn-primary {
+    background-color: #F40009;
+    border-color: #F40009;
+  }
+  
+  .profile-button.ant-btn-dangerous.ant-btn-primary:hover {
+    background-color: #ff3d45;
+    border-color: #ff3d45;
+  }
+  
+  .profile-icon {
+    margin-right: 8px;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .menu-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .menu-icon {
+    font-size: 18px;
+  }
+  
+  .menu-text {
+    margin-left: 16px;
+    white-space: nowrap;
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    flex: 1;
+    padding: 24px;
+    transition: all 0.3s;
+  }
+  
+  .content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Page Styles */
+  .page-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .page-title {
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  /* Card Styles */
+  .dashboard-card {
+    height: 100%;
+    transition: all 0.3s;
+  }
+  
+  .dashboard-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+  }
+  
+  /* Tab Styles */
+  .tabs-container {
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  .tab-content {
+    padding: 16px;
+    min-height: 200px;
+  }
+  
+  /* Fix for profile icon margin in collapsed state */
+  .sidebar.collapsed .profile-icon {
+    margin-right: 0;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+    }
+    
+    .sidebar.collapsed {
+      width: 0;
+      padding: 0;
+    }
+    
+    .sidebar-toggle {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1100;
+      background-color: #F40009 !important;
+      border-radius: 4px;
+    }
+    
+    .main-content {
+      padding: 16px;
+    }
+  }
+
+
+  .full-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .centered-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .full-page-image {
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+  } 

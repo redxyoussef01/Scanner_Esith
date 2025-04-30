@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message, Card, Typography } from 'antd';
+import { Form, Input, Button, message, Card, Typography, Modal } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,20 +11,38 @@ const allowedUsers = {
 
 const cocaColaRed = '#E30613';
 
-function LoginPage({ onLogin }) {
+function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [errorModalVisible, setErrorModalVisible] = useState(false); // State for error modal
 
   const onFinish = (values) => {
     const { username, password } = values;
     if (allowedUsers[username] && allowedUsers[username] === password) {
       message.success(`Connexion réussie en tant que ${username}`);
-      onLogin(username); // Pass the username/role to the parent Layout
-      navigate('/'); // Redirect to the home page
+
+      // Determine user role based on username
+      let userRole = 'user'; // Default role
+      if (username === 'admin' || username === 'super admin') {
+        userRole = 'admin';
+      }
+
+      // Store username and role in localStorage
+      localStorage.setItem('currentUser', username);
+      localStorage.setItem('userRole', userRole);
+      console.log('User logged in:', username, 'with role:', userRole);
+
+      // Redirect to home page
+      navigate('/');
     } else {
-      message.error('Nom d\'utilisateur ou mot de passe incorrect.');
+      // Show error modal
+      setErrorModalVisible(true);
     }
+  };
+
+  const handleOk = () => {
+    setErrorModalVisible(false); // Close modal on OK
   };
 
   return (
@@ -35,16 +53,16 @@ function LoginPage({ onLogin }) {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
-        background: cocaColaRed, // Coca-Cola red background
-        padding: '20px', // Add some padding for responsiveness
+        background: cocaColaRed,
+        padding: '20px',
       }}
     >
       <Card
         style={{
-          width: '100%', // Make card responsive
-          maxWidth: 450, // Increased maximum width
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)', // More pronounced shadow
-          borderRadius: '12px', // More rounded corners
+          width: '100%',
+          maxWidth: 450,
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+          borderRadius: '12px',
         }}
       >
         <Typography.Title level={1} style={{ textAlign: 'center', marginBottom: 24, color: cocaColaRed }}>
@@ -67,7 +85,7 @@ function LoginPage({ onLogin }) {
               placeholder="Nom d'utilisateur"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              size="large" // Increase input size
+              size="large"
             />
           </Form.Item>
 
@@ -81,7 +99,7 @@ function LoginPage({ onLogin }) {
               placeholder="Mot de passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              size="large" // Increase input size
+              size="large"
             />
           </Form.Item>
 
@@ -89,14 +107,22 @@ function LoginPage({ onLogin }) {
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: '100%', backgroundColor: '#1890ff', borderColor: '#1890ff', fontSize: '16px', padding: '10px 0' }} // Style the button
-              size="large" // Increase button size
+              style={{ width: '100%', backgroundColor: '#1890ff', borderColor: '#1890ff', fontSize: '16px', padding: '10px 0' }}
+              size="large"
             >
               Se Connecter
             </Button>
           </Form.Item>
         </Form>
       </Card>
+      <Modal
+        title="Erreur de connexion"
+        visible={errorModalVisible}
+        onOk={handleOk}
+        okText="OK"
+      >
+        <p>Nom d'utilisateur ou mot de passe incorrect.</p>
+      </Modal>
     </div>
   );
 }

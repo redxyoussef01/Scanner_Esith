@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Typography, message } from 'antd';
-import axios from 'axios';
+ import { Table, Card, Typography, message } from 'antd';
+ import axios from 'axios';
 
-const { Title } = Typography;
+ const { Title } = Typography;
 
-function HistoryPage() {
+ function HistoryPage() {
   const [historyData, setHistoryData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +15,9 @@ function HistoryPage() {
       setError(null);
       try {
         const response = await axios.get('http://localhost:5000/api/transaction-log');
-        setHistoryData(response.data);
+        // Filter out transactions where product is 'Produit'
+        const filteredData = response.data.filter(item => item.product !== 'Produit');
+        setHistoryData(filteredData);
       } catch (err) {
         setError(err.message);
         message.error(`Erreur lors du chargement de l'historique : ${err.message}`);
@@ -86,6 +88,6 @@ function HistoryPage() {
       </Card>
     </div>
   );
-}
+ }
 
-export default HistoryPage;
+ export default HistoryPage;

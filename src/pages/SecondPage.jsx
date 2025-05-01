@@ -19,7 +19,7 @@ function SecondPage() {
     // Function to fetch the latest barcode from the backend
     const fetchLatestBarcode = async () => {
         try {
-            const response = await fetch('http://51.83.99.192:5173/api/get-latest-barcode');
+            const response = await fetch('http://51.83.99.192:5000/api/get-latest-barcode');
             if (response.ok) {
                 const data = await response.json();
                 if (data.barcode && data.barcode !== receivedBarcode) { // Process only new barcodes
@@ -44,7 +44,7 @@ function SecondPage() {
     const nullifyQRCode = async (barcode) => {
         try {
             console.log("Nullifying barcode:", barcode);
-            const response = await fetch('http://51.83.99.192:5173/api/nullify-barcode', {
+            const response = await fetch('http://51.83.99.192:5000/api/nullify-barcode', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function SecondPage() {
     useEffect(() => {
         const fetchInventory = async () => {
             try {
-                const response = await fetch('http://51.83.99.192:5173/api/inventory');
+                const response = await fetch('http://51.83.99.192:5000/api/inventory');
                 if (response.ok) {
                     const data = await response.json(); // Expects [{ productId: 'ID1', name: 'Name1', quantity: 10 }, ...]
                     // Ensure productIds are stored correctly, even if they are numbers in Excel
@@ -288,7 +288,7 @@ function SecondPage() {
     
         try {
             const [inventoryResponse, logResponse] = await Promise.all([
-                fetch('http://51.83.99.192:5173/api/update-inventory', {
+                fetch('http://51.83.99.192:5000/api/update-inventory', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(updatesToSend),
@@ -302,7 +302,7 @@ function SecondPage() {
                     }
                     return response.json();
                 }),
-                fetch('http://localhost:5000/api/update-log', {
+                fetch('http://51.83.99.192:5000/api/update-log', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(updatesToSend),

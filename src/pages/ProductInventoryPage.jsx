@@ -24,7 +24,7 @@ import React, { useState, useEffect } from 'react';
   const fetchInventoryData = async () => {
   setLoading(true);
   try {
-  const response = await axios.get('http://localhost:5000/api/inventory');
+  const response = await axios.get('http://51.83.99.192:5000/api/inventory');
   // Filter out the row with productId "ProductID"
   const filteredData = response.data.filter(item => item.productId !== 'ProductID');
   setInventoryData(filteredData);
@@ -64,7 +64,7 @@ import React, { useState, useEffect } from 'react';
   }
 
   try {
-  await axios.post('http://51.83.99.192:5173/api/inventory', {
+  await axios.post('http://51.83.99.192:5000/api/inventory', {
   productId: productId.trim(),
   name: productName.trim(),
   quantity: quantityNum

@@ -14,7 +14,7 @@ import React, { useState, useEffect } from 'react';
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get('http://51.83.99.192:5173/api/transaction-log');
+        const response = await axios.get('http://51.83.99.192:5000/api/transaction-log');
         // Filter out transactions where product is 'Produit'
         const filteredData = response.data.filter(item => item.product !== 'Produit');
         setHistoryData(filteredData);

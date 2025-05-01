@@ -171,7 +171,7 @@ function SecondPage() {
              setReceivedBarcode(null);
          }
 
-
+         nullifyQRCode(productId);
         // Clear input field
         setInputValue('');
     };

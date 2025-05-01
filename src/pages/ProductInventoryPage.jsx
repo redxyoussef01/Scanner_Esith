@@ -64,7 +64,7 @@ import React, { useState, useEffect } from 'react';
   }
 
   try {
-  await axios.post('http://localhost:5000/api/inventory', {
+  await axios.post('http://51.83.99.192:5173/api/inventory', {
   productId: productId.trim(),
   name: productName.trim(),
   quantity: quantityNum

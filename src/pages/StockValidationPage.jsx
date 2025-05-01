@@ -16,7 +16,7 @@ import React, { useState, useEffect, useRef } from 'react';
   // Function to fetch the latest barcode from the backend
   const fetchLatestBarcode = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/get-latest-barcode');
+      const response = await fetch('http://51.83.99.192:5173/api/get-latest-barcode');
       if (response.ok) {
         const data = await response.json();
         if (data.barcode && data.barcode !== receivedBarcode) {
@@ -39,7 +39,7 @@ import React, { useState, useEffect, useRef } from 'react';
   const nullifyQRCode = async (barcode) => {
     try {
       console.log("Nullifying barcode:", barcode);
-      const response = await fetch('http://localhost:5000/api/nullify-barcode', {
+      const response = await fetch('http://51.83.99.192:5173/api/nullify-barcode', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ import React, { useState, useEffect, useRef } from 'react';
   useEffect(() => {
     const fetchInventory = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/inventory');
+        const response = await fetch('http://51.83.99.192:5173/api/inventory');
         if (response.ok) {
           const data = await response.json();
           // Filter out the row with productId "ID Produit"

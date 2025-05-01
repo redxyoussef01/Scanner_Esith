@@ -143,6 +143,7 @@ import React, { useState, useEffect, useRef } from 'react';
     } else {
       setReceivedBarcode(null);
     }
+    nullifyQRCode(productId);
   };
 
   const handleValidateManually = () => {

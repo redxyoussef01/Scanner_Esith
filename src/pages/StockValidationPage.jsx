@@ -71,10 +71,11 @@ import React, { useState, useEffect, useRef } from 'react';
     const fetchInventory = async () => {
       try {
         const response = await fetch('http://51.83.99.192:5000/api/inventory');
+        
         if (response.ok) {
           const data = await response.json();
           // Filter out the row with productId "ID Produit"
-          const filteredData = data.filter(item => item.productId !== 'ProductID');
+          const filteredData = data.filter(item => item.productId !== 'Article');
           setInventoryData(filteredData);
         } else {
           console.error('Failed to fetch inventory:', response.status);
